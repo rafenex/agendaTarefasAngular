@@ -8,6 +8,7 @@ import { CadastroTarefasComponent } from './cadastro-tarefas/cadastro-tarefas.co
 import { ConsultaTarefasComponent } from './consulta-tarefas/consulta-tarefas.component';
 
 import { Routes, RouterModule} from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
 
@@ -30,10 +31,11 @@ const routes: Routes = [
     ConsultaTarefasComponent
   ],
   imports: [
-    BrowserModule,
+   BrowserModule,
    RouterModule.forRoot(routes),
    FormsModule,
-   ReactiveFormsModule
+   ReactiveFormsModule,
+   NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

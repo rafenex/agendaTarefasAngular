@@ -1,3 +1,10 @@
+<div *ngIf="message" class="alert alert-primary alert-dismissible fade show" role="alert">
+    <strong><i class="fa fa-check-circle"></i> {{message}}</strong>
+    <button type="button" class="close" (click)="clearMessage()" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Cadastro de Tarefas</h6>
@@ -5,29 +12,23 @@
     <div class="card-body">
 
         <form [formGroup]="formCadastroTarefa" (ngSubmit)="onSubmit()">
-
             <div class="row">
                 <div class="col-md-6">
                     <label>Nome da tarefa:</label>
                     <input type="text" class="form-control" formControlName="nome" />
-
                     <div class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
-
                         <span *ngIf="form.nome.errors.required">
                             <i class="fa fa-exclamation-circle"></i>
                             Por favor, informe o nome.
                         </span>
-
                         <span *ngIf="form.nome.errors.minlength">
                             <i class="fa fa-exclamation-circle"></i>
                             Por favor, informe pelo menos 6 caracteres.
                         </span>
-
                         <span *ngIf="form.nome.errors.maxlength">
-                            <i class="fa fa-exclamation-circle"></i>
+                            <i class="fa fa-exclamation-circle"></i>D
                             Por favor, informe no máximo 150 caracteres.
                         </span>
-
                     </div>
                 </div>
                 <div class="col-md-3">

@@ -1,10 +1,62 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
+
         <h6 class="m-0 front-weight-bold text-primary">
             Consulta de Taferfas
         </h6>
     </div>
     <div class="card-body">
+        <div style="text-align: center">
+            <pagination-controls (pageChange)="handlePageChange($event)" previousLabel="Página anterior"
+                nextLabel="Próxima página">
+            </pagination-controls>
+        </div>
+        <div class="class table-responsive"></div>
+        <table class="table table hover table-striped">
+            <thead>
+                <tr>
+                    <th>Nome da tarefa</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Descrição</th>
+                    <th>Prioridade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dados | paginate : {itemsPerPage: 3, currentPage: page}">
+                    <td>{{item.nome}}</td>
+                    <td>{{item.data}}</td>
+                    <td>{{item.hora}}</td>
+                    <td>{{item.descricao}}</td>
+                    <td>
+                        <span *ngIf="item.prioridade == '3'" class="badge badge-danger">ALTA</span>
+                        <span *ngIf="item.prioridade == '2'" class="badge badge-warning">MEDIA</span>
+                        <span *ngIf="item.prioridade == '1'" class="badge badge-success">BAIXA</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" data-target="#modal_exclusao" data-toggle="modal"
+                            title="Editar tarefa"><i class="fa fa-clone"></i>
+                        </button>
+                        &nbsp; &nbsp;
+                        <button class="btn btn-sm btn-outline-danger" data-target="#modal_exclusao" data-toggle="modal"
+                            title="Excluir tarefa"><i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">Quantidade de tarefas: {{dados.length}}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <!--Régua de paginação-->
+        <div style="text-align: center">
+            <pagination-controls (pageChange)="handlePageChange($event)" previousLabel="Página anterior"
+                nextLabel="Próxima página">
+            </pagination-controls>
+        </div>
 
     </div>
 </div>
