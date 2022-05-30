@@ -10,6 +10,8 @@ import { ConsultaTarefasComponent } from './consulta-tarefas/consulta-tarefas.co
 import { Routes, RouterModule} from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 const routes: Routes = [
 
   {
@@ -35,7 +37,8 @@ const routes: Routes = [
    RouterModule.forRoot(routes),
    FormsModule,
    ReactiveFormsModule,
-   NgxPaginationModule
+   NgxPaginationModule,
+   Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

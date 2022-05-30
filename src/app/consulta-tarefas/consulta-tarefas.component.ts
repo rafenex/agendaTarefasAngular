@@ -8,6 +8,9 @@ import { TarefasService } from '../services/tarefas.service';
   styleUrls: ['./consulta-tarefas.component.css']
 })
 export class ConsultaTarefasComponent implements OnInit {
+  //atributo para armazenar o filtro de busca
+  filtro = "";
+
   //atributo para armazenar o numero da pagina que o usuario estiver navegando na paginação
   page = 1;
 
