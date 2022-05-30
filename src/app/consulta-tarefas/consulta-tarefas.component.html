@@ -41,7 +41,8 @@
                         <td>
 
                             <button class="btn btn-sm btn-outline-primary" data-target="#modal_edicao"
-                                data-toggle="modal" title="Atualizar tarefa">
+                                data-toggle="modal" title="Atualizar tarefa"
+                                (click)="obterTarefa(item.idTarefa, 'EDITAR')">
                                 <i class="fa fa-clone"></i>
                             </button>
                             &nbsp;
@@ -72,7 +73,138 @@
     </div>
 </div>
 
+<!-- janela  Modal para Atualizar os dados da tarefa -->
+<div id="modal_edicao" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atualizar dados da tarefa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="message" class="alert alert-primary alert-dismissible fade-show" role="alert">
+                <strong>{{message}}</strong>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formEdicaoTarefa" (ngSubmit)="confirmarAtualizacao()">
+                    <!-- campo oculto -->
+                    <input type="hidden" formControlName="idTarefa" />
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Nome da tarefa:</label>
+                            <input type="text" class="form-control" formControlName="nome" />
+
+                            <div class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+
+                                <span *ngIf="form.nome.errors.required">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe o nome.
+                                </span>
+
+                                <span *ngIf="form.nome.errors.minlength">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe pelo menos 6 caracteres.
+                                </span>
+
+                                <span *ngIf="form.nome.errors.maxlength">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe no máximo 150 caracteres.
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Data da tarefa:</label>
+                            <input type="date" class="form-control" formControlName="data" />
+
+                            <div class="text-danger" *ngIf="form.data.touched && form.data.invalid">
+
+                                <span *ngIf="form.data.errors.required">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe a data.
+                                </span>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <label>Hora da tarefa:</label>
+                            <input type="time" class="form-control" formControlName="hora" />
+
+                            <div class="text-danger" *ngIf="form.hora.touched && form.hora.invalid">
+
+                                <span *ngIf="form.hora.errors.required">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe a hora.
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label>Descrição da tarefa:</label>
+                            <textarea class="form-control" formControlName="descricao"></textarea>
+
+                            <div class="text-danger" *ngIf="form.descricao.touched && form.descricao.invalid">
+
+                                <span *ngIf="form.descricao.errors.required">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe a descrição.
+                                </span>
+
+                                <span *ngIf="form.descricao.errors.minlength">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe pelo menos 6 caracteres.
+                                </span>
+
+                                <span *ngIf="form.descricao.errors.maxlength">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe no máximo 250 caracteres.
+                                </span>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <label>Prioridade:</label>
+                            <select class="form-control" formControlName="prioridade">
+                                <option value="">Escolha uma opção</option>
+                                <option value="1">BAIXA</option>
+                                <option value="2">MÉDIA</option>
+                                <option value="3">ALTA</option>
+                            </select>
+
+                            <div class="text-danger" *ngIf="form.prioridade.touched && form.prioridade.invalid">
+
+                                <span *ngIf="form.prioridade.errors.required">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    Por favor, informe a prioridade.
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button class="btn btn-danger" type="submit"
+                                    [disabled]="!formEdicaoTarefa.valid">Confirmar
+                                    Atualização</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- janela  Modal para excluir os dados da tarefa -->
 <div class="modal fade" id="modal_exclusao" tabindex="-1">

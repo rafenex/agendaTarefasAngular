@@ -64,32 +64,40 @@ export class ConsultaTarefasComponent implements OnInit {
     return this.formEdicaoTarefa.controls;
   }
 
-  //metodo para pegar id de quem excluir
-  obterTarefa(idTarefa: number): void {
+  //metodo para pegar id de quem excluir ou editar
+  obterTarefa(idTarefa: number, opcao?: string): void {
+    //buscar os dados da tarefa atraves do ID.
     this.item = this.tarefasService.getTarefaById(idTarefa)
+    //se a opcao for editar iremos preencher um form.
+    if (opcao === 'EDITAR') {
+      //Preencher os campos do FORM.
+      this.form.idTarefa.setValue(this.item.idTarefa);
+      this.form.nome.setValue(this.item.nome);
+      this.form.data.setValue(this.item.data);
+      this.form.hora.setValue(this.item.hora);
+      this.form.descricao.setValue(this.item.descricao);
+      this.form.prioridade.setValue(this.item.prioridade);
+      this.message = "";
+    }
   }
 
+  //funcao para excluir uma tarefa
   confirmaExclusao(): void {
     //excluindo a tarefa selecionada
     this.tarefasService.delete(this.item)
     //carregar a tela com dados atualizados
     this.ngOnInit();
+    this.message = "Dados excluidos com sucesso!"
   }
 
-
-
-  onSubmit(): void {
-    //imprimir o conteudo do formulario
-    console.log(this.formEdicaoTarefa.value);
-    //gravar na lista
-    this.tarefasService.addTarefa(this.formEdicaoTarefa.value);
-    // limpar os campos do formulario
-    this.formEdicaoTarefa.reset();
-    // mensagem
-    //window.alert("Tarefa cadastrada com sucesso")
-    this.message = 'Tarefa cadastrada com sucesso';
+  //funcao para confirmar atualização de uma tarefa
+  confirmarAtualizacao(): void {
+    //atualizar a tarefa com os dados obtidos do formulario
+    this.tarefasService.update(this.formEdicaoTarefa.value);
+    //carregar a tela com dados atualizados
+    this.ngOnInit();
+    this.message = "Dados atualizados com sucesso!"
   }
-
 
   // função para realizar a paginação
   handlePageChange(event: any): void {
