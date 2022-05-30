@@ -52,7 +52,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="5">Quantidade de tarefas: {{dados.length}}</td>
+                    <td colspan="5">Quantidade de tarefas: {{(dados | filter : filtro).length}}</td>
                 </tr>
             </tfoot>
         </table>
