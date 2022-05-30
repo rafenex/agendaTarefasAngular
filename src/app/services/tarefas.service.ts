@@ -82,7 +82,7 @@ export class TarefasService {
     //criar uma função para retornar uma tarefa pelo id
     getTarefaById(idTarefa : number):Tarefa{
        //procurar na lista a tarefa atraves
-    const itemIndex = this.tarefas.findIndex(t => t.idTarefa == idTarefa);
+    const itemIndex = this.tarefas.findIndex(t => t.idTarefa === idTarefa);
     return this.tarefas[itemIndex];
     }
 
